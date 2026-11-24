@@ -1,0 +1,6 @@
+# Python 3.11.9; direct dependency versions from the research environment.
+numpy==2.2.6
+pandas==2.3.3
+matplotlib==3.11.1
+torch==2.13.0
+pytest==8.4.2

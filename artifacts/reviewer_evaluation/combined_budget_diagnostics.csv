@@ -1,0 +1,3 @@
+strategy,decision_days,budget_min,budget_median,budget_max,adaptive_change_max,budget_saturation_count,consensus_change_exceeds_budget_count,mean_target_turnover_reduction
+DAR–Combined-v1,25,0.2122581360965301,0.2894812402561658,1.0,0.9624142409761056,10,23,0.11983060571750549
+DAR–Combined-v2,25,0.8983806210379491,0.933602849253704,1.0,0.9624142409761056,0,0,0.007740123209172929

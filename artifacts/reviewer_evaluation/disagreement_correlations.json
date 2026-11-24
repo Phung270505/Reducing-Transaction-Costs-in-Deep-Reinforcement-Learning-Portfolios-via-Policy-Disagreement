@@ -1,0 +1,23 @@
+{
+  "D_to_consensus_vs_pairwise": {
+    "observations": 25.0,
+    "spearman_rho": 0.9700000000000001,
+    "ci_95_lower": 0.8793946521777164,
+    "ci_95_upper": 0.9953632148377126,
+    "replications": 20000.0
+  },
+  "D_to_consensus_vs_forward_return": {
+    "observations": 24.0,
+    "spearman_rho": 0.1443478260869565,
+    "ci_95_lower": -0.26431919874530063,
+    "ci_95_upper": 0.4958136842009673,
+    "replications": 20000.0
+  },
+  "D_pairwise_vs_forward_return": {
+    "observations": 24.0,
+    "spearman_rho": 0.16,
+    "ci_95_lower": -0.24671048655938912,
+    "ci_95_upper": 0.5041741244078466,
+    "replications": 20000.0
+  }
+}

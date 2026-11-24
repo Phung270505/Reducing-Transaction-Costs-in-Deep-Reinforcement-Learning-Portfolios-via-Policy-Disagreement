@@ -1,0 +1,67 @@
+{
+  "method": "final_three_disagreement_strategy_suite",
+  "proposed_strategy": "PPO_robust_asset_adaptive_optimizer_frozen_v1",
+  "retained_strategies": [
+    "PPO_robust_asset_adaptive_optimizer_frozen_v1",
+    "PPO_robust_asset_adaptive_optimizer",
+    "PPO_soft_disagreement_rebalance"
+  ],
+  "uses_seed_performance_weights": false,
+  "seed_rights": "equal",
+  "disagreement_formula": "mean_i(0.5*L1(w_i - arithmetic_mean(W)))",
+  "candidate_count": 23,
+  "selection_tolerance": 0.002,
+  "minimum_turnover_fraction_of_mean": 0.25,
+  "fit_period": {
+    "start": "2023-01-01",
+    "end": "2023-12-31"
+  },
+  "test_period_not_used_for_selection": true,
+  "selection_objective": "retain candidates within tolerance of the best mean quarterly return - 0.5*quarterly return std; reject stale portfolios below 25% of mean-ensemble turnover when possible; then choose by risk-adjusted score, Sharpe, and lower intervention complexity",
+  "hard_threshold_quantiles": {
+    "low_quantile": 0.25,
+    "high_quantile": 0.75,
+    "low_threshold": 0.11670496318407637,
+    "high_threshold": 0.17485443913494644
+  },
+  "selected_policies": {
+    "PPO_soft_disagreement_rebalance": {
+      "method": "soft",
+      "consensus_method": "mean",
+      "disagreement_k": 0.5,
+      "base_turnover_budget": 1.0,
+      "base_cost_penalty": 0.0,
+      "asset_penalty": 0.0,
+      "low_threshold": null,
+      "high_threshold": null,
+      "partial_rebalance": 0.5,
+      "validation_score": 0.02871998953726168
+    },
+    "PPO_robust_asset_adaptive_optimizer": {
+      "method": "combined",
+      "consensus_method": "geometric_median",
+      "disagreement_k": 0.5,
+      "base_turnover_budget": 1.0,
+      "base_cost_penalty": 0.0,
+      "asset_penalty": 0.05,
+      "low_threshold": null,
+      "high_threshold": null,
+      "partial_rebalance": 0.5,
+      "validation_score": 0.028679744680423967
+    }
+  },
+  "frozen_benchmark_policies": {
+    "PPO_robust_asset_adaptive_optimizer_frozen_v1": {
+      "method": "combined",
+      "consensus_method": "geometric_median",
+      "disagreement_k": 4.0,
+      "base_turnover_budget": 0.5,
+      "base_cost_penalty": 0.01,
+      "asset_penalty": 0.5,
+      "low_threshold": null,
+      "high_threshold": null,
+      "partial_rebalance": 0.5,
+      "validation_score": NaN
+    }
+  }
+}

@@ -1,0 +1,6 @@
+# Keep frozen data, checkpoints, and results byte-identical across checkouts.
+/Data/** -text
+/artifacts/** -text
+/SHA256SUMS -text
+*.pt binary
+*.png binary

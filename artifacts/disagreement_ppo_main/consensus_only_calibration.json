@@ -1,0 +1,67 @@
+{
+  "method": "consensus_only_disagreement_gate",
+  "strategy": "PPO_consensus_only_gate",
+  "seed_aggregation": "unweighted arithmetic mean; no seed confidence weights",
+  "disagreement_formula": "mean_{i<j}(0.5 * L1(w_i, w_j))",
+  "target_formula": "w_target = w_current + gate(disagreement) * (mean_seed_weight - w_current)",
+  "fit_period": {
+    "start": "2023-01-01",
+    "end": "2023-12-31"
+  },
+  "test_period_not_used_for_selection": true,
+  "objective": {
+    "formula": "mean subperiod return - 0.5*std(subperiod return); calendar quarters are used for a one-year calibration window, calendar years otherwise; tie-break by Sharpe - turnover_penalty*annual_turnover - drawdown_penalty*abs(maximum_drawdown)",
+    "turnover_penalty": 0.005,
+    "drawdown_penalty": 0.1
+  },
+  "validation_disagreement_quantiles": {
+    "0.0": 0.13712571929924505,
+    "0.25": 0.18422038000958468,
+    "0.5": 0.2297353386397954,
+    "0.75": 0.2679092012500565,
+    "0.9": 0.2858300491380058,
+    "0.95": 0.2877128884685184,
+    "1.0": 0.28825805965139784
+  },
+  "mean_ensemble_validation_metrics": {
+    "total_return": 0.1863095206267502,
+    "cagr": 0.18875393571867538,
+    "annual_volatility": 0.15761025394749603,
+    "sharpe_ratio": 1.1762793263796805,
+    "sortino_ratio": 1.6124157635548602,
+    "maximum_drawdown": -0.12507210908128308,
+    "calmar_ratio": 1.509160892105898,
+    "var_95_daily": 0.016007933504835602,
+    "cvar_95_daily": 0.024487487860863324,
+    "positive_day_rate": 0.6104417670682731,
+    "benchmark_total_return": 0.11720503465527532,
+    "benchmark_cagr": 0.11869783716210747,
+    "benchmark_sharpe": 0.7481061529949377,
+    "benchmark_maximum_drawdown": -0.17447611401043805,
+    "excess_total_return": 0.0691044859714749,
+    "tracking_error": 0.05910374217979819,
+    "information_ratio": 0.9964418247298785,
+    "beta": 0.8733065771269043,
+    "alpha_annual": 0.07492018944007366,
+    "total_turnover": 6.656537266038235,
+    "annual_turnover": 6.736736510207371,
+    "trade_count": 259.0,
+    "broker_fees": 11108621.79075,
+    "sell_tax": 3344162.0825,
+    "slippage_cost": 3702695.499999632,
+    "total_transaction_cost": 18155479.37324963,
+    "transaction_cost_to_initial": 0.01815547937324963,
+    "mean_available_cash_weight": 0.22581251134935298,
+    "mean_pending_cash_weight": 0.02366538393714431,
+    "mean_max_stock_weight": 0.09552367276596094,
+    "mean_effective_assets": 14.34343989355655
+  },
+  "selected_policy": {
+    "low_threshold": 0.18422038000958468,
+    "high_threshold": 0.2679092012500565,
+    "minimum_rebalance": 0.0,
+    "low_quantile": 0.25,
+    "high_quantile": 0.75,
+    "validation_score": 0.02554373092801393
+  }
+}

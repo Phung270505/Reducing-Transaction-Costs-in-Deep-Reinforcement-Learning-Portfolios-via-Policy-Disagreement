@@ -1,0 +1,2 @@
+comparison,ppo_mean_cost_vnd,dar_soft_cost_vnd,absolute_saving_vnd,relative_cost_reduction,saving_fraction_initial_nav,saving_basis_points_initial_nav_total,saving_basis_points_initial_nav_per_year,note
+DAR–Soft vs PPO mean,39371586.125499144,36845999.138249196,2525586.987249948,0.06414745342490134,0.0025255869872499483,25.25586987249948,12.653918341468362,Economic cost total only; gross-return path requires a full friction rerun and is not inferred.

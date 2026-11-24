@@ -1,0 +1,357 @@
+{
+  "backtest_protocol_version": "3.0.0-proposal-aligned-disagreement-gate",
+  "model_version": 3,
+  "training_algorithm_version": 6,
+  "training_device": {
+    "requested": "cuda:0",
+    "selected": "cuda:0",
+    "type": "CUDA",
+    "pytorch_version": "2.13.0+cu126",
+    "cuda_available": true,
+    "cuda_runtime": "12.6",
+    "gpu_name": "NVIDIA GeForce RTX 2050",
+    "compute_capability": "8.6",
+    "vram_gb": 3.99957275390625,
+    "free_vram_gb": 3.226806640625,
+    "cudnn_version": 91002,
+    "tf32_enabled": true
+  },
+  "experiment": {
+    "data_path": "Data/VN30_VNINDEX_2016_2025.csv",
+    "universe_path": "Data/VN30_VNINDEX_2016_2025.csv",
+    "require_point_in_time_universe": false,
+    "expected_universe_size": 30,
+    "train_start": "2016-01-01",
+    "train_end": "2021-12-31",
+    "validation_start": "2022-01-01",
+    "validation_end": "2022-12-31",
+    "calibration_start": "2023-01-01",
+    "calibration_end": "2023-12-31",
+    "test_start": "2024-01-01",
+    "test_end": "2025-12-31",
+    "test_initial_cash_delay_days": 0,
+    "lookback": 20,
+    "minimum_training_days": 252,
+    "training_episode_days": 504,
+    "output_dir": "artifacts/disagreement_ppo_main"
+  },
+  "market": {
+    "initial_cash": 1000000000.0,
+    "settlement_days": 2,
+    "price_multiplier": 1000.0,
+    "lot_size": 100,
+    "legacy_lot_size": 10,
+    "lot_size_100_effective_date": "2021-01-04",
+    "odd_lot_trading_effective_date": "2022-09-12",
+    "broker_fee_rate": 0.0015,
+    "sell_tax_rate": 0.001,
+    "slippage_bps": 5.0,
+    "max_volume_fraction": 0.01,
+    "price_limit_rate": 0.07,
+    "reward_scale": 100.0,
+    "turnover_penalty_rate": 0.0005,
+    "drawdown_penalty": 0.01,
+    "minimum_trade_fraction": 0.005,
+    "allocation_alpha_reward": 1.0
+  },
+  "ppo": {
+    "total_timesteps": 200000,
+    "rollout_steps": 512,
+    "update_epochs": 6,
+    "batch_size": 128,
+    "learning_rate": 0.00015,
+    "final_learning_rate_fraction": 0.1,
+    "gamma": 0.995,
+    "gae_lambda": 0.97,
+    "clip_range": 0.2,
+    "value_clip_range": 0.2,
+    "entropy_coef": 0.0005,
+    "final_entropy_coef": 0.0,
+    "value_coef": 0.5,
+    "max_grad_norm": 0.5,
+    "target_kl": 0.02,
+    "asset_hidden_size": 64,
+    "context_hidden_size": 192,
+    "architecture": "attention",
+    "attention_heads": 4,
+    "attention_layers": 2,
+    "dropout": 0.0,
+    "momentum_prior_topk": 15,
+    "momentum_prior_cash_weight": 0.05,
+    "momentum_prior_strength": 0.25,
+    "normalize_entropy_by_action_dim": true,
+    "penalty_warmup_fraction": 0.25,
+    "validation_objective": "profit",
+    "rebalance_interval": 20,
+    "validation_turnover_penalty": 0.005,
+    "validation_drawdown_penalty": 0.1,
+    "seed": 42,
+    "device": "cuda:0"
+  },
+  "ensemble": {
+    "low_quantiles": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "high_quantiles": [
+      0.75,
+      0.9
+    ],
+    "minimum_rebalance_grid": [
+      0.0,
+      0.1,
+      1.0
+    ],
+    "soft_disagreement_k_grid": [
+      0.5,
+      1.0,
+      1.5,
+      2.0,
+      3.0,
+      4.0,
+      6.0,
+      8.0
+    ],
+    "adaptive_turnover_budget_grid": [
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "adaptive_turnover_k_grid": [
+      1.0,
+      2.0,
+      4.0
+    ],
+    "adaptive_cost_penalty_grid": [
+      0.0025,
+      0.005,
+      0.01,
+      0.02
+    ],
+    "adaptive_cost_k_grid": [
+      1.0,
+      2.0,
+      4.0,
+      8.0
+    ],
+    "asset_disagreement_k_grid": [
+      2.5,
+      5.0,
+      10.0,
+      20.0
+    ],
+    "hard_partial_rebalance_grid": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "combined_k_grid": [
+      0.5,
+      1.0,
+      2.0,
+      4.0,
+      8.0
+    ],
+    "combined_turnover_budget_grid": [
+      1.0,
+      0.8,
+      0.7,
+      0.5,
+      0.35
+    ],
+    "combined_global_penalty_grid": [
+      0.0,
+      0.0025,
+      0.005,
+      0.01,
+      0.02
+    ],
+    "combined_asset_penalty_grid": [
+      0.05,
+      0.1,
+      0.25,
+      0.5,
+      1.0
+    ],
+    "combined_consensus_methods": [
+      "mean",
+      "median",
+      "geometric_median"
+    ],
+    "combined_consensus_method": "geometric_median",
+    "adaptive_selection_tolerance": 0.002,
+    "reliability_temperature_grid": [
+      0.1,
+      0.25,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "directional_shrinkage_grid": [
+      0.0,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "directional_turnover_regularization_grid": [
+      0.0,
+      0.5,
+      1.0
+    ],
+    "directional_minimum_validation_improvement": 0.0,
+    "regime_lookback_days": 60,
+    "regime_risk_off_exposure_grid": [
+      0.0,
+      0.5,
+      1.0
+    ],
+    "optimization_disagreement_coefficient_grid": [
+      -8.0,
+      -2.0,
+      0.0,
+      2.0,
+      8.0
+    ],
+    "optimization_turnover_regularization_grid": [
+      0.0,
+      0.5,
+      1.0
+    ],
+    "optimization_consensus_methods": [
+      "mean",
+      "median",
+      "trimmed_mean",
+      "geometric",
+      "geometric_sparsemax"
+    ],
+    "optimization_primary_consensus_method": "mean",
+    "run_extended_ablations": false
+  },
+  "evaluation_interval": 2,
+  "seeds": [
+    5,
+    10,
+    15,
+    20,
+    25
+  ],
+  "proposed_strategy": "PPO_robust_asset_adaptive_optimizer_frozen_v1",
+  "input_files": {
+    "prices_sha256": "a2fe87a2b1275755e974b558eddf92100342d88518d7f8097b03452e96a9b91f",
+    "universe_sha256": "a2fe87a2b1275755e974b558eddf92100342d88518d7f8097b03452e96a9b91f"
+  },
+  "tickers": [
+    "ACB",
+    "BID",
+    "BSR",
+    "CTG",
+    "FPT",
+    "GAS",
+    "GVR",
+    "HDB",
+    "HPG",
+    "LPB",
+    "MBB",
+    "MCH",
+    "MSN",
+    "MWG",
+    "SAB",
+    "SHB",
+    "SSB",
+    "SSI",
+    "STB",
+    "TCB",
+    "TCX",
+    "VCB",
+    "VHM",
+    "VIB",
+    "VIC",
+    "VJC",
+    "VNM",
+    "VPB",
+    "VPL",
+    "VRE"
+  ],
+  "eligible_tickers": [
+    "ACB",
+    "BID",
+    "BSR",
+    "CTG",
+    "FPT",
+    "GAS",
+    "GVR",
+    "HDB",
+    "HPG",
+    "LPB",
+    "MBB",
+    "MCH",
+    "MSN",
+    "MWG",
+    "SAB",
+    "SHB",
+    "SSI",
+    "STB",
+    "TCB",
+    "VCB",
+    "VHM",
+    "VIB",
+    "VIC",
+    "VJC",
+    "VNM",
+    "VPB",
+    "VRE"
+  ],
+  "excluded_tickers": [
+    "SSB",
+    "TCX",
+    "VPL"
+  ],
+  "checkpoint_files": {
+    "5": {
+      "filename": "ppo_seed_5.pt",
+      "sha256": "d728efcb701653170229f36c6399a14367d3482b5137b2c095f6d8affb6b373e"
+    },
+    "10": {
+      "filename": "ppo_seed_10.pt",
+      "sha256": "7b971c42c1f33a20e0235beee8a891b1267a67768d5be862ba51f7886204b19a"
+    },
+    "15": {
+      "filename": "ppo_seed_15.pt",
+      "sha256": "7c416b52ec8b2c9501fed52741b712d48d67984c0bdab3e2c72b96dc398f0cb9"
+    },
+    "20": {
+      "filename": "ppo_seed_20.pt",
+      "sha256": "61db5be9b78cd467b62ae2d3213d699bc76dbee50336241b93c74350b4175a79"
+    },
+    "25": {
+      "filename": "ppo_seed_25.pt",
+      "sha256": "f5d34e2196b85e3944e649005600a851e5741107a441cc803dfa0f816eac4393"
+    }
+  },
+  "ensemble_evaluation_device": {
+    "requested": "auto",
+    "selected": "cuda:0",
+    "type": "CUDA",
+    "pytorch_version": "2.13.0+cu126",
+    "cuda_available": true,
+    "cuda_runtime": "12.6",
+    "gpu_name": "NVIDIA GeForce RTX 2050",
+    "compute_capability": "8.6",
+    "vram_gb": 3.99957275390625,
+    "free_vram_gb": 3.226806640625,
+    "cudnn_version": 91002,
+    "tf32_enabled": true
+  },
+  "extended_ablations_evaluated": false,
+  "equal_seed_disagreement_strategy": "PPO_directional_disagreement",
+  "cross_seed_optimizer_strategy": "PPO_cross_seed_disagreement_optimizer",
+  "final_optimized_strategies": [
+    "PPO_robust_asset_adaptive_optimizer_frozen_v1",
+    "PPO_robust_asset_adaptive_optimizer",
+    "PPO_soft_disagreement_rebalance"
+  ],
+  "consensus_only_strategy": "PPO_consensus_only_gate",
+  "final_compact_report": true
+}
